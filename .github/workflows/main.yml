@@ -38,12 +38,14 @@ jobs:
       - name: Authorize SF Org
         run: sfdx force:auth:jwt:grant --clientid 3MVG9fe4g9fhX0E5Vqngh_xXhhA_kaPnWHnvD6VQc7ZiEK8uxAXvxdDOW7ti7LiKepSZG.o8mf6uVM4C2Lze5 --jwtkeyfile ./buildfiles/server.key --username irene@suyati.com --instanceurl https://login.salesforce.com
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+       # Convert to Deploy Source
+      - name: Convert to Deploy Source
+        run: sfdx force:source:convert -r ./force-app -d ./toDeploy
+    
+    # Run Validation of Deploy Source
+      - name: Run Validation on Deploy Source
+        run: sfdx force:mdapi:deploy -l RunLocalTests -c -d ./toDeploy -u dev
+    
+    # Deploy
+      - name : Deploy to SF Org
+        run: sfdx force:mdapi:deploy -l RunLocalTests -d ./toDeploy -u prod -dev 10
