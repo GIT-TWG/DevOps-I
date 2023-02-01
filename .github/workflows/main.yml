@@ -48,4 +48,4 @@ jobs:
     
     # Deploy
       - name : Deploy to SF Org
-        run: sfdx force:source:deploy -x manifest/package.xml -u -irene@suyati.com 
+        run: sfdx force:source:deploy -x manifest/package.xml -u irene@suyati.com 
