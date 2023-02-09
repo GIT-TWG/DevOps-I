@@ -36,7 +36,11 @@ jobs:
         
        # Authorize SF Org
       - name: Authorize SF Org
-        run: sfdx force:auth:jwt:grant --clientid 3MVG9fe4g9fhX0E5Vqngh_xXhhA_kaPnWHnvD6VQc7ZiEK8uxAXvxdDOW7ti7LiKepSZG.o8mf6uVM4C2Lze5 --jwtkeyfile ./buildfiles/server.key --username irene@suyati.com --instanceurl https://login.salesforce.com/
+        env :
+         CLIENT_ID: ${{secrets.CLIENTID}}
+         USERNAME: ${{secrets.USERNAME}}
+         INSTANCE_URL: ${{secrets.INSTANCEURL}}
+        run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL
 
        # Convert to Deploy Source
       - name: Convert to Deploy Source
