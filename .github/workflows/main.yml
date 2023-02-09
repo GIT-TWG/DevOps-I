@@ -36,12 +36,7 @@ jobs:
         
        # Authorize SF Org
       - name: Authorize SF Org
-        env :
-         CLIENT_ID: ${{secrets.CLIENTID}}
-         USERNAME: ${{secrets.USERNAME}}
-         INSTANCE_URL: ${{secrets.INSTANCEURL}}
-        
-        run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL
+        run: sfdx force:auth:jwt:grant --clientid 3MVG9fe4g9fhX0E5Vqngh_xXhhA_kaPnWHnvD6VQc7ZiEK8uxAXvxdDOW7ti7LiKepSZG.o8mf6uVM4C2Lze5 --jwtkeyfile ./buildfiles/server.key --username irene@suyati.com --instanceurl https://login.salesforce.com/
 
        # Convert to Deploy Source
       - name: Convert to Deploy Source
@@ -49,10 +44,10 @@ jobs:
     
     # Run Validation of Deploy Source
       - name: Run Validation on Deploy Source
-        run: sfdx force:source:deploy -c -x manifest/package.xml -u  $USERNAME
+        run: sfdx force:source:deploy -c -x manifest/package.xml -u  irene@suyati.com
     
     # Deploy
       - name : Deploy to SF Org
         if: ${{github.event_name == 'push'}}
-        run: sfdx force:source:deploy -x manifest/package.xml -u $USERNAME
+        run: sfdx force:source:deploy -x manifest/package.xml -u irene@suyati.com
  
