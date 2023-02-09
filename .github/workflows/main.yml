@@ -37,9 +37,9 @@ jobs:
        # Authorize SF Org
       - name: Authorize SF Org
         env :
-         CLIENT_ID: ${{ secrets.CLIENTID }}
-         USERNAME: ${{ secrets.USERNAME }}
-         INSTANCE_URL: ${{ secrets.INSTANCEURL }}
+         CLIENT_ID: ${{secrets.CLIENTID}}
+         USERNAME: ${{secrets.USERNAME }}
+         INSTANCE_URL: ${{secrets.INSTANCEURL}}
         
         run: sfdx force:auth:jwt:grant --clientid $CLIENT_ID --jwtkeyfile ./buildfiles/server.key --username $USERNAME --instanceurl $INSTANCE_URL
 
